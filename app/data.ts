@@ -1,10 +1,10 @@
 export const person = {
-  name: "Ashwin",
+  name: "Kirusanth",
   title: "Computer Engineering Student",
-  email: "ashwin.jakanathan@gmail.com",
-  github: "https://github.com/ashwin-jakanathan",
-  linkedin: "https://www.linkedin.com/in/ashwin-jakanathan-6639a7291/",
-  instagram: "https://instagram.com/ashwin_jakanathan",
+  email: "kirusanthpalakanthan5@gmail.com",
+  github: "https://github.com/Kirusanth290",
+  linkedin: "https://www.linkedin.com/in/kirusanth-palakanthan/",
+  instagram: "https://instagram.com/kirusanth.05",
   resumeUrl: "/resume.pdf",
 };
 

@@ -12,17 +12,13 @@ type Project = {
 };
 
 const projects: Project[] = [
-  { 
-    title: "League Insights AI (Rift Rewind)",
-    desc: "Hackathon submission analyzing a full year of League of Legends match history. Generates detailed performance stats, timeline analytics (early game, midgame, throws, comebacks), kill heatmaps, monthly trends, and an AI-generated season recap using Amazon Bedrock. Built with Riot API, PostgreSQL for analytics, and asynchronous data processing.",
-    stack: ["Next.js", "React", "TypeScript", "TailwindCSS", "Framer Motion", "Recharts", "Flask", "Python", "PostgreSQL", "Riot Games API", "Amazon Bedrock", "aiohttp", "Vercel", "Render"],
-    link: "https://league-insights-ai.vercel.app/",
-  },
+  
   {
-    title: "E-Commerce Database Application",
-    desc: "Designed a campus marketplace DBMS with entities for users, products, orders, and payments. Implemented advanced Oracle SQL queries and automated database operations using Unix Shell scripts in a Linux environment. Generated reports and ensured data consistency to support secure, reliable transactions.",
-    stack: ["Oracle SQL", "Unix Shell", "Linux", "Database Design"],
-    link: "#"
+    title: "Ride & Pickup Database Management System",
+desc: "Designed and implemented a comprehensive database system to manage a campus ride & pickup marketplace. Developed a robust relational schema and optimized complex Oracle SQL queries to support users, rides, bookings, and reporting. Automated database operations using Unix shell scripts in a Linux environment to ensure data integrity, secure transactions, and reliable system performance.",
+stack: ["Oracle SQL", "Unix Shell", "Linux", "Database Design", "Automation"],
+link: "https://github.com/Kirusanth290/Ride-Pickup-Database-Management-System"
+
   },
   {
     title: "Serverless Portfolio Backend",
@@ -31,19 +27,32 @@ const projects: Project[] = [
     link: "https://ashwin-jakanathan.vercel.app/",
   },
   {
-    title: "Bookstore Management",
-    desc: "Java OOP + State Pattern with persistent file storage.",
-    stack: ["Java","OOP","State Pattern","File I/O"],
+    title: "Bookstore Management System",
+desc: "Developed a Java-based bookstore management application using object-oriented programming principles and the State Design Pattern. Implemented persistent file-based storage to manage inventory, customer interactions, and transaction states across sessions. Designed modular, maintainable code to handle state transitions, data validation, and file I/O operations efficiently.",
+stack: ["Java", "OOP", "State Pattern", "File I/O"],
+link: "https://github.com/Kirusanth290/Book_Store_Project"
+
   },
   {
-    title: "Super Smash Bros Replica",
-    desc: "Developed a Super Smash Bros replica in Python, coordinating team efforts to emulate the game mechanics. Designed architecture, implemented character movement and combat, integrated audio-visual elements, and optimized performance. Demonstrated expertise in Python programming, game development, and teamwork.",
-    stack: ["Python", "Game Development"],
+   title: "Microprocessor Systems Project — Robot Guidance Challenge",
+desc: "Developed an autonomous robot navigation system as part of a microprocessor systems course project. Designed firmware logic and control algorithms to guide a robot through maze environments using sensor feedback and finite state machines. Implemented decision-making routines for obstacle detection, path correction, and goal achievement while ensuring responsiveness and reliability in real-time operation.",
+stack: ["C", "Microcontrollers", "Embedded Systems", "Finite State Machines"],
+link: "https://github.com/Kirusanth290/Microprocessor-Systems-Project-Robot-Guidance-Challenge"
+
   },
   {
-    title: "Student Course Planner",
-    desc: "JavaFX app using topological sort for prerequisite planning.",
-    stack: ["JavaFX","Algorithms"],
+    title: "Fitness Exercise Application",
+desc: "Designed and developed a responsive, user-friendly fitness application using React and Material UI, allowing users to explore over 100 exercises categorized by muscle groups and workout types. Integrated RapidAPI to dynamically fetch exercise data, ensuring real-time content delivery and a seamless user experience. Applied modern React development practices such as custom hooks and a modular file structure to improve performance, maintainability, and scalability.",
+stack: ["React.js", "Material UI", "RapidAPI", "Frontend Development", "Web Design"],
+link: "#"
+
+  },
+  {
+   title: "Google Data Analytics Capstone Project",
+desc: "Completed an end-to-end data analytics capstone as part of the Google Data Analytics Professional Certificate. Performed data cleaning, transformation, and exploratory analysis on a real-world dataset to identify trends and actionable insights. Utilized SQL and spreadsheet tools for analysis, created data visualizations to communicate findings, and delivered data-driven recommendations supported by clear documentation and storytelling.",
+stack: ["Data Analysis", "SQL", "Spreadsheets", "Data Visualization", "Data Cleaning"],
+link: "#"
+
   },
 ];
 
