@@ -14,10 +14,10 @@ const scrollToId = (id: string) =>
   });
 
 export default function HomePage() {
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState<"home" | "about" | "skills">("home");
 
   useEffect(() => {
-    const ids = ["home", "about", "skills"];
+    const ids: Array<"home" | "about" | "skills"> = ["home", "about", "skills"];
     const observers: IntersectionObserver[] = [];
 
     ids.forEach((id) => {
@@ -25,8 +25,7 @@ export default function HomePage() {
       if (!el) return;
 
       const observer = new IntersectionObserver(
-        (entries) =>
-          entries.forEach((e) => e.isIntersecting && setActive(id)),
+        (entries) => entries.forEach((e) => e.isIntersecting && setActive(id)),
         { rootMargin: "-40% 0px -60% 0px" }
       );
 
@@ -42,41 +41,51 @@ export default function HomePage() {
       {/* NAVBAR */}
       <nav className="sticky top-0 z-50 bg-black/30 backdrop-blur border-b border-white/10">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-          <h1 className="text-2xl font-bold text-white">Kirusanth</h1>
+          <button
+            onClick={() => scrollToId("home")}
+            className="text-2xl font-bold text-white hover:opacity-90 transition"
+          >
+            Kirusanth
+          </button>
 
           <div className="flex items-center gap-3">
-            {[
-              { id: "about", label: "About", type: "scroll" as const },
-              { id: "skills", label: "Skills", type: "scroll" as const },
-              { id: "/projects", label: "Projects", type: "route" as const },
-              { id: "/contact", label: "Contact", type: "route" as const },
-            ].map((item) => {
-              const isActive = item.type === "scroll" && active === item.id;
+            {/* Scroll sections */}
+            <button
+              onClick={() => scrollToId("about")}
+              className={`px-4 py-2 rounded-xl transition ${
+                active === "about"
+                  ? "bg-white text-black"
+                  : "text-white hover:bg-white/10"
+              }`}
+            >
+              About
+            </button>
 
-              if (item.type === "route") {
-                return (
-                  <Link
-                    key={item.id}
-                    href={item.id}
-                    className="px-4 py-2 rounded-xl text-white hover:bg-white/10 transition"
-                  >
-                    {item.label}
-                  </Link>
-                );
-              }
+            <button
+              onClick={() => scrollToId("skills")}
+              className={`px-4 py-2 rounded-xl transition ${
+                active === "skills"
+                  ? "bg-white text-black"
+                  : "text-white hover:bg-white/10"
+              }`}
+            >
+              Skills
+            </button>
 
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToId(item.id)}
-                  className={`px-4 py-2 rounded-xl transition ${
-                    isActive ? "bg-white text-black" : "text-white hover:bg-white/10"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              );
-            })}
+            {/* Route links styled same as buttons */}
+            <Link
+              href="/projects"
+              className="px-4 py-2 rounded-xl text-white hover:bg-white/10 transition"
+            >
+              Projects
+            </Link>
+
+            <Link
+              href="/contact"
+              className="px-4 py-2 rounded-xl text-white hover:bg-white/10 transition"
+            >
+              Contact
+            </Link>
 
             <ThemeToggle />
           </div>
@@ -89,7 +98,7 @@ export default function HomePage() {
           {/* LEFT */}
           <div className="text-white">
             <h1 className="text-5xl md:text-6xl font-black mb-5 leading-tight">
-              Hi, I'm{" "}
+              Hi, I&apos;m{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 Kirusanth
               </span>
@@ -102,6 +111,8 @@ export default function HomePage() {
             <div className="flex flex-wrap gap-4 mb-8">
               <a
                 href={person.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-xl font-semibold transition"
               >
                 View Resume
@@ -218,7 +229,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA + FOOTER (like your friend's) */}
+      {/* CTA + FOOTER (friend-style, but your theme) */}
       <section className="mt-20 border-t border-white/10 bg-black/20">
         {/* CTA */}
         <div className="max-w-6xl mx-auto px-6 py-20 text-center text-white">
