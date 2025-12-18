@@ -15,16 +15,17 @@ import {
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
 
-const scrollToId = (id: string) => {
-  if (typeof window === "undefined") return;
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-};
+const scrollToId = (id: string) =>
+  document.getElementById(id)?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
 
 export default function HomePage() {
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState<"home" | "about" | "skills">("home");
 
   useEffect(() => {
-    const ids = ["home", "about", "skills"];
+    const ids: Array<"home" | "about" | "skills"> = ["home", "about", "skills"];
     const obs: IntersectionObserver[] = [];
 
     ids.forEach((id) => {
@@ -45,7 +46,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
-      {/* Navigation */}
+      {/* NAVBAR */}
       <nav className="sticky top-0 z-50 backdrop-blur-md bg-gradient-to-b from-[var(--card-bg)]/90 to-[var(--card-bg)]/50 border-b border-[var(--card-border)]/50 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -99,7 +100,7 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* HERO */}
       <section id="home" className="relative py-20 sm:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--card-bg)]/20 via-transparent to-transparent pointer-events-none" />
         <div className="absolute top-20 right-0 w-96 h-96 bg-[var(--accent)]/5 rounded-full blur-3xl pointer-events-none" />
@@ -108,7 +109,8 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in-up space-y-6">
               <h1 className="text-5xl sm:text-6xl font-bold text-[var(--foreground)] leading-tight">
-                Hi, I'm <span className="text-[var(--accent)]">{person.name}</span>
+                Hi, I'm{" "}
+                <span className="text-[var(--accent)]">{person.name}</span>
               </h1>
 
               <p className="text-xl text-[var(--text-secondary)] max-w-lg">
@@ -164,6 +166,7 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* IMAGE */}
             <div className="relative animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               <div className="relative w-full aspect-square">
                 <div className="absolute -inset-6 bg-gradient-to-br from-[var(--accent)]/20 to-transparent rounded-2xl blur-2xl" />
@@ -174,7 +177,7 @@ export default function HomePage() {
                     src="/profile.jpeg"
                     alt={person.name}
                     fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
+                    className="object-cover object-top hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
                   />
@@ -185,7 +188,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* ABOUT */}
       <section id="about" className="relative py-20 border-t border-[var(--card-border)]/50">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--card-bg)]/10 to-transparent pointer-events-none" />
 
@@ -200,26 +203,32 @@ export default function HomePage() {
 
             <div className="space-y-6 text-[var(--text-secondary)]">
               <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-                I’m Kirusanth Palakanthan, a Computer Engineering student at Toronto Metropolitan University, with a strong interest in software engineering, embedded systems, and full-stack development. I’m passionate about building reliable, scalable solutions that bridge hardware and software, and I enjoy applying engineering fundamentals to solve real-world problems.
+                I’m <strong>Kirusanth Palakanthan</strong>, a Computer Engineering student at{" "}
+                <strong>Toronto Metropolitan University</strong>, with a strong interest in software engineering,
+                embedded systems, and full-stack development.
               </p>
 
               <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-                Through my academic and project experience, I’ve developed a solid foundation in programming, data structures, and system design, with hands-on work across C/C++, Python, Java, SQL, and TypeScript. I’ve built and debugged embedded systems using microcontrollers, designed relational database systems with Oracle SQL, and developed responsive web applications using React and Next.js.
+                Through my academic and project experience, I’ve built a foundation across C/C++, Python, Java, SQL,
+                and TypeScript — including embedded systems work with microcontrollers, Oracle SQL database design,
+                and modern web development with React/Next.js.
               </p>
 
               <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-                My projects range from a robot maze navigation system using sensor-based finite state machines, to a fully automated Ride & Pickup Database Management System integrating Oracle SQL with Unix shell scripting. I’ve also worked on backend APIs, database integration, and frontend interfaces, giving me a well-rounded perspective on modern software development.
+                My projects range from a robot maze navigation system using sensor-based finite state machines,
+                to a fully automated Ride & Pickup DBMS integrating Oracle SQL with Unix shell scripting.
               </p>
 
               <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-                I thrive in collaborative, fast-paced environments where I can combine analytical thinking with attention to detail to deliver clean, maintainable code. Outside of academics, I’m actively preparing for internship and co-op opportunities, expanding my portfolio, and strengthening my skills with tools such as Git, Docker, and cloud platforms.
+                I’m actively preparing for co-op opportunities, expanding my portfolio, and strengthening my skills
+                with tools like Git, Docker, and cloud platforms.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
+      {/* SKILLS */}
       <section id="skills" className="relative py-20 border-t border-[var(--card-border)]/50">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--card-bg)]/5 to-transparent pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--accent)]/5 rounded-full blur-3xl pointer-events-none" />
@@ -247,136 +256,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="relative py-16 border-t border-[var(--card-border)]/50">
-        <div className="absolute inset-0 bg-gradient-to-b from-[var(--card-bg)]/20 to-transparent pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h3 className="text-3xl font-bold text-[var(--foreground)] mb-4">
-            Ready to work together?
-          </h3>
-          <p className="text-[var(--text-secondary)] mb-8 max-w-2xl mx-auto">
-            I'm always interested in hearing about new projects and opportunities. Feel free to reach out!
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--accent)] text-white font-semibold rounded-lg hover:bg-[var(--button-hover)] transition-all duration-300 hover:scale-105 hover:shadow-xl group"
-          >
-            Get In Touch
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="relative border-t border-[var(--card-border)]/50 bg-gradient-to-b from-transparent to-[var(--card-bg)]/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-            {/* Left Column */}
-            <div>
-              <h3 className="text-xl font-bold text-[var(--accent)] mb-4">Kirusanth</h3>
-              <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">
-                Computer Engineering student building innovative software solutions with modern web technologies.
-              </p>
-              <div className="flex gap-4">
-                <a
-                  href={person.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-                  aria-label="GitHub"
-                >
-                  <Github className="w-5 h-5" />
-                </a>
-                <a
-                  href={person.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a
-                  href={`mailto:${person.email}`}
-                  className="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-                  aria-label="Email"
-                >
-                  <Mail className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Middle Column */}
-            <div>
-              <h4 className="font-semibold text-[var(--foreground)] mb-6">Quick Links</h4>
-              <ul className="space-y-3">
-                <li>
-                  <button
-                    onClick={() => scrollToId("home")}
-                    className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-                  >
-                    Home
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToId("about")}
-                    className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-                  >
-                    About
-                  </button>
-                </li>
-                <li>
-                  <Link
-                    href="/projects"
-                    className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-                  >
-                    Projects
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToId("skills")}
-                    className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-                  >
-                    Skills
-                  </button>
-                </li>
-                <li>
-                  <Link
-                    href="/contact"
-                    className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-                  >
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Right Column */}
-            <div>
-              <h4 className="font-semibold text-[var(--foreground)] mb-6">Get In Touch</h4>
-              <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">
-                Feel free to reach out for collaborations or just a friendly hello!
-              </p>
-              <a
-                href={`mailto:${person.email}`}
-                className="text-sm text-[var(--accent)] hover:text-[var(--accent-light)] transition-colors font-medium"
-              >
-                {person.email}
-              </a>
-            </div>
-          </div>
-
-          <div className="border-t border-[var(--card-border)]/30 pt-8">
-            <p className="text-sm text-[var(--text-secondary)] text-center">
-              © {new Date().getFullYear()} Kirusanth Palakanthan. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
