@@ -24,7 +24,7 @@ link: "https://github.com/Kirusanth290/Ride-Pickup-Database-Management-System"
   title: "Serverless Portfolio Backend",
   desc: "Contact form API with monitoring (CloudWatch) + alerts (SNS).",
   stack: ["API Gateway", "Lambda (Python)", "DynamoDB", "SES", "Terraform"],
-  
+  link: "#"
 },
   {
     title: "Bookstore Management System",
