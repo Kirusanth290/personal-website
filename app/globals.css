@@ -1,22 +1,52 @@
 @import "tailwindcss";
 
+/* =========================
+   Theme Tokens (CSS Vars)
+   ========================= */
+
 :root {
-  /* Light mode */
-  --background: #e6eefc;
-  --foreground: #1e3a8a;
-  --card-bg: #ffffff;
-  --card-border: #c7d2fe;
-  --accent: #2563eb;
-  --accent-light: #3b82f6;
-  --button-hover: #1d4ed8;
-  --text-secondary: #475569;
+  /* Purple → Indigo → Blue gradient background */
+  --background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 45%, #1d4ed8 100%);
+  --foreground: #f8fafc;
+
+  /* Use RGB triplets so rgba(var(--card-bg-rgb), x) works */
+  --card-bg-rgb: 255 255 255;
+  --card-border: rgba(255, 255, 255, 0.18);
+
+  /* Accent (cyan pops nicely on purple/blue) */
+  --accent: #22d3ee;
+  --accent-light: #60a5fa;
+  --button-hover: #06b6d4;
+
+  /* Text */
+  --text-secondary: rgba(248, 250, 252, 0.82);
+
+  /* Effects */
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+  --ring: 0 0 0 3px rgba(34, 211, 238, 0.25);
+}
+
+html.dark {
+  /* Deeper gradient for dark mode */
+  --background: linear-gradient(135deg, #2e1065 0%, #1e1b4b 45%, #0b1220 100%);
+  --foreground: #e2e8f0;
+
+  --card-bg-rgb: 15 23 42; /* slate-900-ish */
+  --card-border: rgba(148, 163, 184, 0.22);
+
+  --accent: #38bdf8;
+  --accent-light: #93c5fd;
+  --button-hover: #0ea5e9;
+
+  --text-secondary: rgba(226, 232, 240, 0.78);
+
+  --shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+  --ring: 0 0 0 3px rgba(56, 189, 248, 0.25);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-card-bg: var(--card-bg);
-  --color-card-border: var(--card-border);
   --color-accent: var(--accent);
   --color-accent-light: var(--accent-light);
   --color-button-hover: var(--button-hover);
@@ -25,43 +55,62 @@
   --font-mono: var(--font-geist-mono);
 }
 
-html.dark {
-  /* Dark mode */
-  --background: #0b1120;
-  --foreground: #e2e8f0;
-  --card-bg: #1e293b;
-  --card-border: #334155;
-  --accent: #60a5fa;
-  --accent-light: #93c5fd;
-  --button-hover: #3b82f6;
-  --text-secondary: #c9d5e7;
+/* =========================
+   Base
+   ========================= */
+
+html,
+body {
+  height: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 a:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
-/* Custom Animations */
+/* A subtle ambient glow layer */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -40%;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 25% 15%, rgba(34, 211, 238, 0.18), transparent 45%),
+    radial-gradient(circle at 75% 25%, rgba(99, 102, 241, 0.18), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(29, 78, 216, 0.16), transparent 55%);
+  filter: blur(40px);
+}
+
+/* =========================
+   Custom Animations
+   ========================= */
+
 @keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+  0%,
+  100% {
+    box-shadow: 0 0 6px rgba(34, 211, 238, 0.25);
   }
   50% {
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.6);
+    box-shadow: 0 0 22px rgba(34, 211, 238, 0.45);
   }
 }
 
 @keyframes glow-dark {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(96, 165, 250, 0.3);
+  0%,
+  100% {
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.22);
   }
   50% {
-    box-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
+    box-shadow: 0 0 22px rgba(56, 189, 248, 0.42);
   }
 }
 
@@ -75,11 +124,12 @@ a:hover {
 }
 
 @keyframes pulse-subtle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
-    opacity: 0.8;
+    opacity: 0.82;
   }
 }
 
@@ -97,7 +147,7 @@ a:hover {
 @keyframes slide-in-left {
   0% {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-18px);
   }
   100% {
     opacity: 1;
@@ -105,7 +155,10 @@ a:hover {
   }
 }
 
-/* Animation Utility Classes */
+/* =========================
+   Animation Utility Classes
+   ========================= */
+
 .animate-glow {
   animation: glow 2s ease-in-out infinite;
 }
@@ -115,11 +168,11 @@ html.dark .animate-glow {
 }
 
 .animate-expand-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .animate-expand-hover:hover {
-  animation: expand 0.3s ease forwards;
+  animation: expand 0.25s ease forwards;
 }
 
 .animate-pulse-subtle {
@@ -140,38 +193,40 @@ html.dark .animate-glow {
 }
 
 .animate-children > *:nth-child(1) {
-  animation-delay: 0.1s;
+  animation-delay: 0.08s;
 }
-
 .animate-children > *:nth-child(2) {
-  animation-delay: 0.2s;
+  animation-delay: 0.16s;
 }
-
 .animate-children > *:nth-child(3) {
-  animation-delay: 0.3s;
+  animation-delay: 0.24s;
 }
-
 .animate-children > *:nth-child(4) {
+  animation-delay: 0.32s;
+}
+.animate-children > *:nth-child(5) {
   animation-delay: 0.4s;
 }
-
-.animate-children > *:nth-child(5) {
-  animation-delay: 0.5s;
+.animate-children > *:nth-child(n + 6) {
+  animation-delay: 0.48s;
 }
 
-.animate-children > *:nth-child(n+6) {
-  animation-delay: 0.6s;
-}
-
-/* Component Classes */
+/* =========================
+   Component Classes
+   ========================= */
 
 .nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--card-border);
-  background-color: rgba(var(--card-bg), 0.8);
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--card-bg-rgb), 0.14),
+    rgba(var(--card-bg-rgb), 0.08)
+  );
 }
 
 .nav-inner {
@@ -182,6 +237,7 @@ html.dark .animate-glow {
   height: 4rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 @media (min-width: 640px) {
@@ -201,7 +257,7 @@ html.dark .animate-glow {
 .section {
   padding-top: 5rem;
   padding-bottom: 5rem;
-  border-top: 1px solid var(--card-border);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .container {
@@ -226,78 +282,99 @@ html.dark .animate-glow {
   }
 }
 
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 300ms;
+  padding: 0.65rem 1rem;
+  border-radius: 0.85rem;
+  font-weight: 600;
+  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease,
+    border-color 200ms ease, color 200ms ease;
   cursor: pointer;
-  border: none;
+  border: 1px solid transparent;
   background: none;
 }
 
 .btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
 }
 
 .btn-primary {
   background-color: var(--accent);
-  color: white;
+  color: #081019;
+  box-shadow: 0 10px 24px rgba(34, 211, 238, 0.25);
 }
 
 .btn-primary:hover {
   background-color: var(--button-hover);
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 14px 30px rgba(34, 211, 238, 0.35);
 }
 
 .btn-ghost {
-  border: 2px solid var(--card-border);
+  border: 1px solid var(--card-border);
   color: var(--foreground);
-  transition: all 300ms;
+  background: rgba(var(--card-bg-rgb), 0.08);
 }
 
 .btn-ghost:hover {
-  border-color: var(--accent);
-  background-color: rgba(37, 99, 235, 0.1);
+  border-color: rgba(34, 211, 238, 0.5);
+  background: rgba(34, 211, 238, 0.12);
 }
 
+/* Cards */
 .card {
-  padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: var(--card-bg);
+  padding: 1.1rem;
+  border-radius: 1rem;
+  background: linear-gradient(
+    to bottom right,
+    rgba(var(--card-bg-rgb), 0.18),
+    rgba(var(--card-bg-rgb), 0.08)
+  );
   border: 1px solid var(--card-border);
   text-align: center;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--foreground);
-  transition: all 300ms;
-  animation: fade-in-up 0.6s ease-out forwards;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease,
+    background 220ms ease;
   cursor: pointer;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.12);
 }
 
 .card:hover {
-  border-color: var(--accent);
-  background-color: rgba(37, 99, 235, 0.1);
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: rgba(34, 211, 238, 0.55);
+  background: linear-gradient(
+    to bottom right,
+    rgba(34, 211, 238, 0.16),
+    rgba(var(--card-bg-rgb), 0.10)
+  );
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
 }
 
-html.dark .card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
+/* Sticky contact bar */
 .contact-bar {
   position: sticky;
   bottom: 0;
   z-index: 40;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-top: 1px solid var(--card-border);
-  background-color: rgba(var(--card-bg), 0.8);
+  background: linear-gradient(
+    to top,
+    rgba(var(--card-bg-rgb), 0.14),
+    rgba(var(--card-bg-rgb), 0.08)
+  );
 }
 
+/* Convenience helpers */
 .fade-up {
   animation: fade-in-up 0.6s ease-out forwards;
 }
