@@ -88,28 +88,52 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
-      {/* Navigation */}
       <nav className="sticky top-0 z-50 backdrop-blur-md bg-gradient-to-b from-[var(--card-bg)]/90 to-[var(--card-bg)]/50 border-b border-[var(--card-border)]/50 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link 
-              href="/"
-              className="flex items-center gap-2 text-[var(--accent)] hover:opacity-80 transition-opacity font-semibold"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              Back
-            </Link>
-            
-            <h1 className="text-xl font-bold text-[var(--accent)]">Contact</h1>
-            
-            <ThemeToggle />
-          </div>
-        </div>
-      </nav>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex items-center justify-between h-16">
+      <Link
+        href="/"
+        className="text-xl font-bold text-[var(--accent)] hover:opacity-80 transition-opacity"
+      >
+        Kirusanth
+      </Link>
+
+      <div className="flex items-center gap-2">
+        <Link
+          href="/#about"
+          className="px-3 py-2 rounded-lg text-sm font-medium hover:bg-[var(--card-bg)]/50 text-[var(--text-secondary)] transition-all"
+        >
+          About
+        </Link>
+        <Link
+          href="/#skills"
+          className="px-3 py-2 rounded-lg text-sm font-medium hover:bg-[var(--card-bg)]/50 text-[var(--text-secondary)] transition-all"
+        >
+          Skills
+        </Link>
+        <Link
+          href="/projects"
+          className="px-3 py-2 rounded-lg text-sm font-medium hover:bg-[var(--card-bg)]/50 text-[var(--text-secondary)] transition-all"
+        >
+          Projects
+        </Link>
+        <Link
+          href="/contact"
+          className="px-3 py-2 rounded-lg text-sm font-medium bg-[var(--accent)]/20 text-[var(--accent)] transition-all"
+        >
+          Contact
+        </Link>
+
+        <ThemeToggle />
+      </div>
+    </div>
+  </div>
+</nav>
+
 
       {/* Main Content */}
       <section className="relative py-20">
-        <div className="absolute insesst-0 bg-gradient-to-b from-[var(--card-bg)]/20 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[var(--card-bg)]/20 via-transparent to-transparent pointer-events-none" />
         <div className="absolute top-20 right-0 w-96 h-96 bg-[var(--accent)]/5 rounded-full blur-3xl pointer-events-none" />
         
         <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
