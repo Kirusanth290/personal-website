@@ -1,263 +1,176 @@
 @import "tailwindcss";
 
-/* =========================
-   Theme Tokens (CSS Vars)
-   ========================= */
+/* =========================================================
+   GLOBAL COLOR SYSTEM (PURPLE → BLUE PORTFOLIO THEME)
+========================================================= */
 
 :root {
-  /* Purple → Indigo → Blue gradient background */
-  --background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 45%, #1d4ed8 100%);
-  --foreground: #f8fafc;
+  /* Text */
+  --foreground: #e5e7eb;
+  --text-secondary: #c7d2fe;
 
-  /* Use RGB triplets so rgba(var(--card-bg-rgb), x) works */
-  --card-bg-rgb: 255 255 255;
-  --card-border: rgba(255, 255, 255, 0.18);
-
-  /* Accent (cyan pops nicely on purple/blue) */
+  /* Accent (buttons, highlights) */
   --accent: #22d3ee;
-  --accent-light: #60a5fa;
+  --accent-light: #67e8f9;
   --button-hover: #06b6d4;
 
-  /* Text */
-  --text-secondary: rgba(248, 250, 252, 0.82);
-
-  /* Effects */
-  --shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
-  --ring: 0 0 0 3px rgba(34, 211, 238, 0.25);
+  /* Cards */
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.15);
 }
 
-html.dark {
-  /* Deeper gradient for dark mode */
-  --background: linear-gradient(135deg, #2e1065 0%, #1e1b4b 45%, #0b1220 100%);
-  --foreground: #e2e8f0;
-
-  --card-bg-rgb: 15 23 42; /* slate-900-ish */
-  --card-border: rgba(148, 163, 184, 0.22);
-
-  --accent: #38bdf8;
-  --accent-light: #93c5fd;
-  --button-hover: #0ea5e9;
-
-  --text-secondary: rgba(226, 232, 240, 0.78);
-
-  --shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
-  --ring: 0 0 0 3px rgba(56, 189, 248, 0.25);
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-accent-light: var(--accent-light);
-  --color-button-hover: var(--button-hover);
-  --color-text-secondary: var(--text-secondary);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-/* =========================
-   Base
-   ========================= */
+/* =========================================================
+   BASE STYLES
+========================================================= */
 
 html,
 body {
-  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: var(--foreground);
+  background: #0b1026;
+  scroll-behavior: smooth;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+a {
+  text-decoration: none;
 }
 
 a:hover {
   opacity: 0.9;
 }
 
-/* A subtle ambient glow layer */
-body::before {
-  content: "";
-  position: fixed;
-  inset: -40%;
-  pointer-events: none;
-  z-index: -1;
-  background:
-    radial-gradient(circle at 25% 15%, rgba(34, 211, 238, 0.18), transparent 45%),
-    radial-gradient(circle at 75% 25%, rgba(99, 102, 241, 0.18), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(29, 78, 216, 0.16), transparent 55%);
-  filter: blur(40px);
+/* =========================================================
+   SECTION BACKGROUNDS
+========================================================= */
+
+/* HERO / TOP SECTION */
+.bg-hero {
+  background: linear-gradient(
+    135deg,
+    #5b21b6 0%,    /* bright purple */
+    #4c1d95 25%,
+    #4338ca 55%,
+    #1e3a8a 100%  /* blue */
+  );
 }
 
-/* =========================
-   Custom Animations
-   ========================= */
-
-@keyframes glow {
-  0%,
-  100% {
-    box-shadow: 0 0 6px rgba(34, 211, 238, 0.25);
-  }
-  50% {
-    box-shadow: 0 0 22px rgba(34, 211, 238, 0.45);
-  }
+/* ABOUT SECTION */
+.bg-about {
+  background: linear-gradient(
+    180deg,
+    #1e3a8a 0%,
+    #111827 100%
+  );
 }
 
-@keyframes glow-dark {
-  0%,
-  100% {
-    box-shadow: 0 0 6px rgba(56, 189, 248, 0.22);
-  }
-  50% {
-    box-shadow: 0 0 22px rgba(56, 189, 248, 0.42);
-  }
+/* SKILLS / DARK SECTION */
+.bg-skills {
+  background: radial-gradient(
+    circle at top,
+    #1e1b4b 0%,
+    #020617 70%
+  );
 }
 
-@keyframes expand {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.05);
-  }
-}
-
-@keyframes pulse-subtle {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.82;
-  }
-}
-
-@keyframes fade-in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-in-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-18px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* =========================
-   Animation Utility Classes
-   ========================= */
-
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
-}
-
-html.dark .animate-glow {
-  animation: glow-dark 2s ease-in-out infinite;
-}
-
-.animate-expand-hover {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.animate-expand-hover:hover {
-  animation: expand 0.25s ease forwards;
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 2s ease-in-out infinite;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out;
-}
-
-.animate-slide-in-left {
-  animation: slide-in-left 0.6s ease-out;
-}
-
-/* Stagger children animations */
-.animate-children > * {
-  animation: fade-in-up 0.6s ease-out backwards;
-}
-
-.animate-children > *:nth-child(1) {
-  animation-delay: 0.08s;
-}
-.animate-children > *:nth-child(2) {
-  animation-delay: 0.16s;
-}
-.animate-children > *:nth-child(3) {
-  animation-delay: 0.24s;
-}
-.animate-children > *:nth-child(4) {
-  animation-delay: 0.32s;
-}
-.animate-children > *:nth-child(5) {
-  animation-delay: 0.4s;
-}
-.animate-children > *:nth-child(n + 6) {
-  animation-delay: 0.48s;
-}
-
-/* =========================
-   Component Classes
-   ========================= */
+/* =========================================================
+   NAVBAR
+========================================================= */
 
 .nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
   background: linear-gradient(
-    to bottom,
-    rgba(var(--card-bg-rgb), 0.14),
-    rgba(var(--card-bg-rgb), 0.08)
+    to right,
+    rgba(91, 33, 182, 0.7),
+    rgba(30, 58, 138, 0.7)
   );
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.nav-inner {
-  max-width: 80rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 1rem;
-  height: 4rem;
-  display: flex;
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-primary {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+  color: #020617;
+  transition: all 300ms ease;
 }
 
-@media (min-width: 640px) {
-  .nav-inner {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+.btn-primary:hover {
+  background: linear-gradient(135deg, #67e8f9, #38bdf8);
+  transform: scale(1.05);
+  box-shadow: 0 12px 30px rgba(34, 211, 238, 0.3);
+}
+
+.btn-outline {
+  border: 2px solid var(--card-border);
+  color: var(--foreground);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 300ms ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+  background: rgba(34, 211, 238, 0.1);
+}
+
+/* =========================================================
+   CARDS (SKILLS / PROJECTS)
+========================================================= */
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  transition: all 300ms ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-6px);
+  box-shadow: 0 0 30px rgba(34, 211, 238, 0.18);
+}
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (min-width: 1024px) {
-  .nav-inner {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out forwards;
 }
+
+/* =========================================================
+   UTILITIES
+========================================================= */
 
 .section {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 .container {
@@ -280,105 +193,4 @@ html.dark .animate-glow {
     padding-left: 2rem;
     padding-right: 2rem;
   }
-}
-
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1rem;
-  border-radius: 0.85rem;
-  font-weight: 600;
-  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease,
-    border-color 200ms ease, color 200ms ease;
-  cursor: pointer;
-  border: 1px solid transparent;
-  background: none;
-}
-
-.btn:hover {
-  transform: translateY(-1px);
-}
-
-.btn:focus-visible {
-  outline: none;
-  box-shadow: var(--ring);
-}
-
-.btn-primary {
-  background-color: var(--accent);
-  color: #081019;
-  box-shadow: 0 10px 24px rgba(34, 211, 238, 0.25);
-}
-
-.btn-primary:hover {
-  background-color: var(--button-hover);
-  box-shadow: 0 14px 30px rgba(34, 211, 238, 0.35);
-}
-
-.btn-ghost {
-  border: 1px solid var(--card-border);
-  color: var(--foreground);
-  background: rgba(var(--card-bg-rgb), 0.08);
-}
-
-.btn-ghost:hover {
-  border-color: rgba(34, 211, 238, 0.5);
-  background: rgba(34, 211, 238, 0.12);
-}
-
-/* Cards */
-.card {
-  padding: 1.1rem;
-  border-radius: 1rem;
-  background: linear-gradient(
-    to bottom right,
-    rgba(var(--card-bg-rgb), 0.18),
-    rgba(var(--card-bg-rgb), 0.08)
-  );
-  border: 1px solid var(--card-border);
-  text-align: center;
-  font-weight: 700;
-  color: var(--foreground);
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease,
-    background 220ms ease;
-  cursor: pointer;
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.12);
-}
-
-.card:hover {
-  border-color: rgba(34, 211, 238, 0.55);
-  background: linear-gradient(
-    to bottom right,
-    rgba(34, 211, 238, 0.16),
-    rgba(var(--card-bg-rgb), 0.10)
-  );
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
-}
-
-/* Sticky contact bar */
-.contact-bar {
-  position: sticky;
-  bottom: 0;
-  z-index: 40;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-top: 1px solid var(--card-border);
-  background: linear-gradient(
-    to top,
-    rgba(var(--card-bg-rgb), 0.14),
-    rgba(var(--card-bg-rgb), 0.08)
-  );
-}
-
-/* Convenience helpers */
-.fade-up {
-  animation: fade-in-up 0.6s ease-out forwards;
-}
-
-.rise {
-  animation: fade-in-up 0.6s ease-out forwards;
 }
