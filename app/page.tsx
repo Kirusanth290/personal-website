@@ -171,7 +171,7 @@ export default function HomePage() {
 
                 <div className="relative w-full h-full rounded-2xl overflow-hidden border-2 border-[var(--card-border)] hover:border-[var(--accent)] transition-all duration-300 hover:shadow-2xl">
                   <Image
-                    src="/profile.jpg"
+                    src="/profile.jpeg"
                     alt={person.name}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-300"
