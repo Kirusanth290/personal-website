@@ -43,6 +43,7 @@ export default function HomePage() {
       <nav className="sticky top-0 z-50 bg-black/40 backdrop-blur border-b border-white/10">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
           <h1 className="text-2xl font-bold text-white">Kirusanth</h1>
+
           <div className="flex items-center gap-4">
             {["about", "skills"].map((section) => (
               <button
@@ -57,6 +58,21 @@ export default function HomePage() {
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </button>
             ))}
+
+            <Link
+              href="/projects"
+              className="px-4 py-2 rounded-xl transition text-white hover:bg-white/20"
+            >
+              Projects
+            </Link>
+
+            <Link
+              href="/contact"
+              className="px-4 py-2 rounded-xl transition text-white hover:bg-white/20"
+            >
+              Contact
+            </Link>
+
             <ThemeToggle />
           </div>
         </div>
@@ -97,12 +113,16 @@ export default function HomePage() {
             <div className="flex gap-4">
               <a
                 href={person.github}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-3 rounded-xl border border-white/20 hover:bg-white/10 transition"
               >
                 <Github />
               </a>
               <a
                 href={person.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-3 rounded-xl border border-white/20 hover:bg-white/10 transition"
               >
                 <Linkedin />
@@ -116,7 +136,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* RIGHT IMAGE (AVERAGE SIZE + CLEAN) */}
+          {/* RIGHT IMAGE */}
           <div className="flex justify-center md:justify-end">
             <div
               className="relative 
@@ -216,9 +236,127 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="py-10 text-center text-white/60">
-        © {new Date().getFullYear()} Kirusanth Palakanthan
+      {/* CTA SECTION */}
+      <section className="py-24 px-6 bg-gradient-to-t from-black/60 to-transparent text-white text-center">
+        <h2 className="text-4xl font-bold mb-4">Ready to work together?</h2>
+        <p className="text-white/80 max-w-2xl mx-auto mb-8">
+          I'm always interested in hearing about new projects and opportunities.
+          Feel free to reach out!
+        </p>
+
+        <Link
+          href="/contact"
+          className="inline-flex items-center justify-center bg-cyan-500 hover:bg-cyan-600
+                     text-white px-8 py-4 rounded-xl font-semibold transition"
+        >
+          Get In Touch →
+        </Link>
+      </section>
+
+      {/* FOOTER (3 columns) */}
+      <footer className="bg-black/40 border-t border-white/10 py-16 px-6 text-white/80">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* LEFT */}
+          <div>
+            <h3 className="text-2xl font-bold text-cyan-400 mb-3">Kirusanth</h3>
+            <p className="text-white/70 mb-4">
+              Computer Engineering student building innovative software and
+              embedded systems.
+            </p>
+
+            <div className="flex gap-4">
+              <a
+                href={person.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-cyan-400 transition"
+                aria-label="GitHub"
+              >
+                <Github />
+              </a>
+              <a
+                href={person.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-cyan-400 transition"
+                aria-label="LinkedIn"
+              >
+                <Linkedin />
+              </a>
+              <a
+                href={`mailto:${person.email}`}
+                className="hover:text-cyan-400 transition"
+                aria-label="Email"
+              >
+                <Mail />
+              </a>
+            </div>
+          </div>
+
+          {/* MIDDLE */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2 text-white/70">
+              <li>
+                <Link href="/" className="hover:text-cyan-400 transition">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToId("about");
+                  }}
+                  className="hover:text-cyan-400 transition"
+                >
+                  About
+                </a>
+              </li>
+              <li>
+                <Link href="/projects" className="hover:text-cyan-400 transition">
+                  Projects
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="#skills"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToId("skills");
+                  }}
+                  className="hover:text-cyan-400 transition"
+                >
+                  Skills
+                </a>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-cyan-400 transition">
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* RIGHT */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Get In Touch</h4>
+            <p className="text-white/70 mb-2">
+              Feel free to reach out for collaboration or opportunities.
+            </p>
+            <a
+              href={`mailto:${person.email}`}
+              className="text-cyan-400 hover:underline"
+            >
+              {person.email}
+            </a>
+          </div>
+        </div>
+
+        <div className="mt-12 text-center text-white/50 text-sm">
+          © {new Date().getFullYear()} Kirusanth Palakanthan. All rights reserved.
+        </div>
       </footer>
     </div>
   );
