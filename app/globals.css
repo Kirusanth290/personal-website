@@ -1,15 +1,26 @@
 @import "tailwindcss";
 
+/* -------------------------------------------------------
+   Base theme tokens (your components use: var(--background),
+   var(--card-bg), var(--accent), etc.)
+--------------------------------------------------------*/
 :root {
-  /* Light mode */
-  --background: #e6eefc;
-  --foreground: #1e3a8a;
-  --card-bg: #ffffff;
-  --card-border: #c7d2fe;
-  --accent: #2563eb;
-  --accent-light: #3b82f6;
-  --button-hover: #1d4ed8;
-  --text-secondary: #475569;
+  /* Light mode (kept usable) */
+  --background: #f3f4ff;
+  --foreground: #0f172a;
+
+  --card-bg: rgba(255, 255, 255, 0.75);
+  --card-border: rgba(99, 102, 241, 0.25);
+
+  --accent: #0ea5e9;         /* cyan/blue accent */
+  --accent-light: #22d3ee;
+  --button-hover: #0284c7;
+
+  --text-secondary: rgba(15, 23, 42, 0.72);
+
+  /* Effects */
+  --shadow-soft: 0 12px 40px rgba(2, 6, 23, 0.10);
+  --shadow-strong: 0 18px 60px rgba(2, 6, 23, 0.18);
 }
 
 @theme inline {
@@ -25,16 +36,33 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* -------------------------------------------------------
+   Dark mode: matches your screenshots (purple/blue top,
+   deeper black on skills section)
+--------------------------------------------------------*/
 html.dark {
-  /* Dark mode */
-  --background: #0b1120;
-  --foreground: #e2e8f0;
-  --card-bg: #1e293b;
-  --card-border: #334155;
-  --accent: #60a5fa;
-  --accent-light: #93c5fd;
-  --button-hover: #3b82f6;
-  --text-secondary: #c9d5e7;
+  --background: #070615;     /* deep base */
+  --foreground: #eef2ff;
+
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.12);
+
+  --accent: #22d3ee;         /* bright cyan */
+  --accent-light: #38bdf8;
+  --button-hover: #06b6d4;
+
+  --text-secondary: rgba(238, 242, 255, 0.72);
+
+  --shadow-soft: 0 14px 50px rgba(0, 0, 0, 0.35);
+  --shadow-strong: 0 22px 80px rgba(0, 0, 0, 0.50);
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -42,266 +70,112 @@ body {
   color: var(--foreground);
 }
 
+/* -------------------------------------------------------
+   Global “site glow” so the page feels rich, not flat
+--------------------------------------------------------*/
+html.dark body {
+  /* subtle global depth */
+  background-image:
+    radial-gradient(900px 500px at 20% 10%, rgba(139, 92, 246, 0.25), transparent 60%),
+    radial-gradient(900px 520px at 80% 15%, rgba(59, 130, 246, 0.20), transparent 60%),
+    radial-gradient(900px 560px at 50% 90%, rgba(34, 211, 238, 0.10), transparent 65%);
+  background-attachment: fixed;
+}
+
+/* -------------------------------------------------------
+   SECTION BACKGROUNDS (this is the key part)
+   Targets your existing: <section id="home"> and <section id="skills">
+--------------------------------------------------------*/
+
+/* HERO: brighter purple/blue like your screenshot */
+html.dark section#home {
+  position: relative;
+  background-image:
+    radial-gradient(1200px 700px at 15% 5%, rgba(168, 85, 247, 0.55), transparent 55%),
+    radial-gradient(1000px 650px at 85% 10%, rgba(59, 130, 246, 0.45), transparent 55%),
+    linear-gradient(135deg, rgba(88, 28, 135, 0.55), rgba(37, 99, 235, 0.35));
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* SKILLS: darker/black wash near the end */
+html.dark section#skills {
+  position: relative;
+  background-image:
+    radial-gradient(1200px 700px at 20% 20%, rgba(59, 130, 246, 0.18), transparent 55%),
+    radial-gradient(1200px 800px at 80% 25%, rgba(168, 85, 247, 0.16), transparent 55%),
+    linear-gradient(135deg, rgba(2, 6, 23, 0.92), rgba(0, 0, 0, 0.98));
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Optional: make About in-between (not too bright, not too dark) */
+html.dark section#about {
+  position: relative;
+  background-image:
+    radial-gradient(900px 520px at 30% 10%, rgba(168, 85, 247, 0.20), transparent 60%),
+    radial-gradient(900px 520px at 70% 15%, rgba(59, 130, 246, 0.16), transparent 60%),
+    linear-gradient(180deg, rgba(7, 6, 21, 0.20), rgba(7, 6, 21, 0.55));
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* -------------------------------------------------------
+   Navbar polish (works with your Tailwind classes)
+--------------------------------------------------------*/
+nav {
+  box-shadow: var(--shadow-soft);
+}
+
+/* -------------------------------------------------------
+   Links + focus
+--------------------------------------------------------*/
 a:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
-/* Custom Animations */
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.6);
-  }
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 10px;
 }
 
-@keyframes glow-dark {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(96, 165, 250, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(96, 165, 250, 0.6);
-  }
-}
-
-@keyframes expand {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.05);
-  }
-}
-
-@keyframes pulse-subtle {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
+/* -------------------------------------------------------
+   Animations (keep yours + make them smoother)
+--------------------------------------------------------*/
 @keyframes fade-in-up {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slide-in-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  0% { opacity: 0; transform: translateX(-16px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
-/* Animation Utility Classes */
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.82; }
 }
 
-html.dark .animate-glow {
-  animation: glow-dark 2s ease-in-out infinite;
-}
+.animate-fade-in-up { animation: fade-in-up 0.7s ease-out both; }
+.animate-slide-in-left { animation: slide-in-left 0.7s ease-out both; }
+.animate-pulse-subtle { animation: pulse-subtle 2.2s ease-in-out infinite; }
 
-.animate-expand-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.animate-expand-hover:hover {
-  animation: expand 0.3s ease forwards;
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 2s ease-in-out infinite;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out;
-}
-
-.animate-slide-in-left {
-  animation: slide-in-left 0.6s ease-out;
-}
-
-/* Stagger children animations */
 .animate-children > * {
-  animation: fade-in-up 0.6s ease-out backwards;
+  animation: fade-in-up 0.7s ease-out both;
 }
+.animate-children > *:nth-child(1) { animation-delay: 0.10s; }
+.animate-children > *:nth-child(2) { animation-delay: 0.18s; }
+.animate-children > *:nth-child(3) { animation-delay: 0.26s; }
+.animate-children > *:nth-child(4) { animation-delay: 0.34s; }
+.animate-children > *:nth-child(5) { animation-delay: 0.42s; }
+.animate-children > *:nth-child(n+6) { animation-delay: 0.50s; }
 
-.animate-children > *:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.animate-children > *:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.animate-children > *:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-.animate-children > *:nth-child(4) {
-  animation-delay: 0.4s;
-}
-
-.animate-children > *:nth-child(5) {
-  animation-delay: 0.5s;
-}
-
-.animate-children > *:nth-child(n+6) {
-  animation-delay: 0.6s;
-}
-
-/* Component Classes */
-
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--card-border);
-  background-color: rgba(var(--card-bg), 0.8);
-}
-
-.nav-inner {
-  max-width: 80rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 1rem;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-}
-
-@media (min-width: 640px) {
-  .nav-inner {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .nav-inner {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-.section {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-  border-top: 1px solid var(--card-border);
-}
-
-.container {
-  max-width: 80rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-  .container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 300ms;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-}
-
-.btn-primary {
-  background-color: var(--accent);
-  color: white;
-}
-
-.btn-primary:hover {
-  background-color: var(--button-hover);
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
-}
-
-.btn-ghost {
-  border: 2px solid var(--card-border);
-  color: var(--foreground);
-  transition: all 300ms;
-}
-
-.btn-ghost:hover {
-  border-color: var(--accent);
-  background-color: rgba(37, 99, 235, 0.1);
-}
-
-.card {
-  padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: var(--card-bg);
-  border: 1px solid var(--card-border);
-  text-align: center;
-  font-weight: 600;
-  color: var(--foreground);
-  transition: all 300ms;
-  animation: fade-in-up 0.6s ease-out forwards;
-  cursor: pointer;
-}
-
-.card:hover {
-  border-color: var(--accent);
-  background-color: rgba(37, 99, 235, 0.1);
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-html.dark .card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.contact-bar {
-  position: sticky;
-  bottom: 0;
-  z-index: 40;
-  backdrop-filter: blur(12px);
-  border-top: 1px solid var(--card-border);
-  background-color: rgba(var(--card-bg), 0.8);
-}
-
-.fade-up {
-  animation: fade-in-up 0.6s ease-out forwards;
-}
-
-.rise {
-  animation: fade-in-up 0.6s ease-out forwards;
+/* -------------------------------------------------------
+   Small QoL
+--------------------------------------------------------*/
+img {
+  max-width: 100%;
+  height: auto;
 }
