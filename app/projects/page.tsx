@@ -21,11 +21,11 @@ link: "https://github.com/Kirusanth290/Ride-Pickup-Database-Management-System"
 
   },
   {
-    title: "Serverless Portfolio Backend",
-    desc: "Contact form API with monitoring (CloudWatch) + alerts (SNS).",
-    stack: ["API Gateway","Lambda (Python)","DynamoDB","SES","Terraform"],
-    link: "https://kirusanth-palakanthan.vercel.app/",
-  },
+  title: "Serverless Portfolio Backend",
+  desc: "Contact form API with monitoring (CloudWatch) + alerts (SNS).",
+  stack: ["API Gateway", "Lambda (Python)", "DynamoDB", "SES", "Terraform"],
+  link: "https://personal-website-mu-nine-56.vercel.app/",
+},
   {
     title: "Bookstore Management System",
 desc: "Developed a Java-based bookstore management application using object-oriented programming principles and the State Design Pattern. Implemented persistent file-based storage to manage inventory, customer interactions, and transaction states across sessions. Designed modular, maintainable code to handle state transitions, data validation, and file I/O operations efficiently.",
