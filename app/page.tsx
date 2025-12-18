@@ -3,21 +3,21 @@
 import Image from "next/image";
 import Link from "next/link";
 import { person, skills } from "./data";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
 
-const scrollToId = (id: string) =>
-  document.getElementById(id)?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
+const scrollToId = (id: string) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+};
 
 export default function HomePage() {
   const [active, setActive] = useState("home");
 
   useEffect(() => {
-    const ids = ["home", "about", "skills"];
+    const ids = ["home", "about", "skills", "contact"];
     const observers: IntersectionObserver[] = [];
 
     ids.forEach((id) => {
@@ -25,8 +25,7 @@ export default function HomePage() {
       if (!el) return;
 
       const observer = new IntersectionObserver(
-        (entries) =>
-          entries.forEach((e) => e.isIntersecting && setActive(id)),
+        (entries) => entries.forEach((e) => e.isIntersecting && setActive(id)),
         { rootMargin: "-40% 0px -60% 0px" }
       );
 
@@ -42,23 +41,32 @@ export default function HomePage() {
       {/* NAVBAR */}
       <nav className="sticky top-0 z-50 bg-black/40 backdrop-blur border-b border-white/10">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-          <h1 className="text-2xl font-bold text-white">Kirusanth</h1>
+          <button
+            onClick={() => scrollToId("home")}
+            className="text-2xl font-bold text-white hover:opacity-90 transition"
+          >
+            Kirusanth
+          </button>
 
-          <div className="flex items-center gap-4">
-            {["about", "skills"].map((section) => (
+          <div className="flex items-center gap-3">
+            {[
+              { id: "about", label: "About" },
+              { id: "skills", label: "Skills" },
+            ].map((s) => (
               <button
-                key={section}
-                onClick={() => scrollToId(section)}
+                key={s.id}
+                onClick={() => scrollToId(s.id)}
                 className={`px-4 py-2 rounded-xl transition ${
-                  active === section
+                  active === s.id
                     ? "bg-white text-black"
                     : "text-white hover:bg-white/20"
                 }`}
               >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
+                {s.label}
               </button>
             ))}
 
+            {/* Projects goes to /projects page */}
             <Link
               href="/projects"
               className="px-4 py-2 rounded-xl transition text-white hover:bg-white/20"
@@ -66,12 +74,17 @@ export default function HomePage() {
               Projects
             </Link>
 
-            <Link
-              href="/contact"
-              className="px-4 py-2 rounded-xl transition text-white hover:bg-white/20"
+            {/* Contact scrolls to contact section */}
+            <button
+              onClick={() => scrollToId("contact")}
+              className={`px-4 py-2 rounded-xl transition ${
+                active === "contact"
+                  ? "bg-white text-black"
+                  : "text-white hover:bg-white/20"
+              }`}
             >
               Contact
-            </Link>
+            </button>
 
             <ThemeToggle />
           </div>
@@ -84,7 +97,7 @@ export default function HomePage() {
           {/* LEFT */}
           <div className="text-white">
             <h1 className="text-5xl md:text-6xl font-black mb-5 leading-tight">
-              Hi, I'm{" "}
+              Hi, I&apos;m{" "}
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 Kirusanth
               </span>
@@ -113,23 +126,22 @@ export default function HomePage() {
             <div className="flex gap-4">
               <a
                 href={person.github}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="p-3 rounded-xl border border-white/20 hover:bg-white/10 transition"
+                aria-label="GitHub"
               >
                 <Github />
               </a>
               <a
                 href={person.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="p-3 rounded-xl border border-white/20 hover:bg-white/10 transition"
+                aria-label="LinkedIn"
               >
                 <Linkedin />
               </a>
               <a
                 href={`mailto:${person.email}`}
                 className="p-3 rounded-xl border border-white/20 hover:bg-white/10 transition"
+                aria-label="Email"
               >
                 <Mail />
               </a>
@@ -139,12 +151,9 @@ export default function HomePage() {
           {/* RIGHT IMAGE */}
           <div className="flex justify-center md:justify-end">
             <div
-              className="relative 
-                w-[300px] h-[420px]
-                md:w-[420px] md:h-[560px]
-                rounded-2xl overflow-hidden
-                border border-white/20
-                shadow-[0_30px_80px_rgba(0,0,0,0.5)]"
+              className="relative w-[300px] h-[420px] md:w-[420px] md:h-[560px]
+                         rounded-2xl overflow-hidden border border-white/20
+                         shadow-[0_30px_80px_rgba(0,0,0,0.5)]"
             >
               <Image
                 src="/profile.jpeg"
@@ -178,36 +187,19 @@ export default function HomePage() {
             I’m <strong>Kirusanth Palakanthan</strong>, a Computer Engineering
             student at <strong>Toronto Metropolitan University</strong>, with a
             strong interest in software engineering, embedded systems, and
-            full-stack development. I’m passionate about building reliable,
-            scalable solutions that bridge hardware and software, and I enjoy
-            applying engineering fundamentals to solve real-world problems.
+            full-stack development.
           </p>
 
           <p className="mb-6 leading-relaxed">
-            Through my academic and project experience, I’ve developed a solid
-            foundation in programming, data structures, and system design, with
-            hands-on work across C/C++, Python, Java, SQL, and TypeScript. I’ve
-            built and debugged embedded systems using microcontrollers, designed
-            relational database systems with Oracle SQL, and developed responsive
-            web applications using React and Next.js.
-          </p>
-
-          <p className="mb-6 leading-relaxed">
-            My projects range from a robot maze navigation system using
-            sensor-based finite state machines, to a fully automated Ride & Pickup
-            Database Management System integrating Oracle SQL with Unix shell
-            scripting. I’ve also worked on backend APIs, database integration, and
-            frontend interfaces, giving me a well-rounded perspective on modern
-            software development.
+            I’ve worked across C/C++, Python, Java, SQL, and TypeScript — from
+            embedded systems to Oracle DBMS automation and React/Next.js web
+            apps.
           </p>
 
           <p className="leading-relaxed">
-            I thrive in collaborative, fast-paced environments where I can
-            combine analytical thinking with attention to detail to deliver
-            clean, maintainable code. Outside of academics, I’m actively
-            preparing for internship and co-op opportunities, expanding my
-            portfolio, and strengthening my skills with tools such as Git,
-            Docker, and cloud platforms.
+            I’m actively preparing for internship and co-op opportunities and
+            expanding my portfolio with modern tooling like Git and cloud
+            platforms.
           </p>
         </div>
       </section>
@@ -236,128 +228,138 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA SECTION */}
-      <section className="py-24 px-6 bg-gradient-to-t from-black/60 to-transparent text-white text-center">
-        <h2 className="text-4xl font-bold mb-4">Ready to work together?</h2>
-        <p className="text-white/80 max-w-2xl mx-auto mb-8">
-          I'm always interested in hearing about new projects and opportunities.
-          Feel free to reach out!
-        </p>
-
-        <Link
-          href="/contact"
-          className="inline-flex items-center justify-center bg-cyan-500 hover:bg-cyan-600
-                     text-white px-8 py-4 rounded-xl font-semibold transition"
-        >
-          Get In Touch →
-        </Link>
-      </section>
-
-      {/* FOOTER (3 columns) */}
-      <footer className="bg-black/40 border-t border-white/10 py-16 px-6 text-white/80">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* LEFT */}
-          <div>
-            <h3 className="text-2xl font-bold text-cyan-400 mb-3">Kirusanth</h3>
-            <p className="text-white/70 mb-4">
-              Computer Engineering student building innovative software and
-              embedded systems.
+      {/* CTA + CONTACT SECTION (LIKE YOUR FRIEND) */}
+      <section id="contact" className="pt-20">
+        {/* CTA */}
+        <div className="px-6">
+          <div className="max-w-6xl mx-auto text-center py-16 border-t border-white/10">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+              Ready to work together?
+            </h2>
+            <p className="text-white/75 max-w-2xl mx-auto mb-8">
+              I’m always interested in hearing about new projects and
+              opportunities. Feel free to reach out!
             </p>
+            <button
+              onClick={() => scrollToId("footer")}
+              className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold transition"
+            >
+              Get In Touch <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
 
-            <div className="flex gap-4">
-              <a
-                href={person.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-cyan-400 transition"
-                aria-label="GitHub"
-              >
-                <Github />
-              </a>
-              <a
-                href={person.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-cyan-400 transition"
-                aria-label="LinkedIn"
-              >
-                <Linkedin />
-              </a>
+        {/* Footer-style contact block */}
+        <footer
+          id="footer"
+          className="px-6 pb-10 pt-14 bg-black/20 border-t border-white/10"
+        >
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* Left */}
+            <div className="text-white/80">
+              <div className="text-2xl font-bold text-cyan-400 mb-3">
+                Kirusanth
+              </div>
+              <p className="leading-relaxed">
+                Computer Engineering student building reliable software and
+                systems with modern technologies.
+              </p>
+
+              <div className="flex gap-4 mt-6">
+                <a
+                  href={person.github}
+                  className="p-3 rounded-xl border border-white/20 hover:bg-white/10 transition"
+                  aria-label="GitHub"
+                >
+                  <Github />
+                </a>
+                <a
+                  href={person.linkedin}
+                  className="p-3 rounded-xl border border-white/20 hover:bg-white/10 transition"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin />
+                </a>
+                <a
+                  href={`mailto:${person.email}`}
+                  className="p-3 rounded-xl border border-white/20 hover:bg-white/10 transition"
+                  aria-label="Email"
+                >
+                  <Mail />
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="text-white/80">
+              <div className="text-lg font-semibold text-white mb-4">
+                Quick Links
+              </div>
+              <ul className="space-y-3">
+                <li>
+                  <button
+                    onClick={() => scrollToId("home")}
+                    className="hover:text-white transition"
+                  >
+                    Home
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollToId("about")}
+                    className="hover:text-white transition"
+                  >
+                    About
+                  </button>
+                </li>
+                <li>
+                  <Link href="/projects" className="hover:text-white transition">
+                    Projects
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollToId("skills")}
+                    className="hover:text-white transition"
+                  >
+                    Skills
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollToId("contact")}
+                    className="hover:text-white transition"
+                  >
+                    Contact
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Get In Touch */}
+            <div className="text-white/80">
+              <div className="text-lg font-semibold text-white mb-4">
+                Get In Touch
+              </div>
+              <p className="leading-relaxed mb-4">
+                Feel free to reach out for collaborations or just a friendly
+                hello!
+              </p>
               <a
                 href={`mailto:${person.email}`}
-                className="hover:text-cyan-400 transition"
-                aria-label="Email"
+                className="text-cyan-300 hover:text-cyan-200 transition"
               >
-                <Mail />
+                {person.email}
               </a>
             </div>
           </div>
 
-          {/* MIDDLE */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-white/70">
-              <li>
-                <Link href="/" className="hover:text-cyan-400 transition">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="#about"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToId("about");
-                  }}
-                  className="hover:text-cyan-400 transition"
-                >
-                  About
-                </a>
-              </li>
-              <li>
-                <Link href="/projects" className="hover:text-cyan-400 transition">
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <a
-                  href="#skills"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToId("skills");
-                  }}
-                  className="hover:text-cyan-400 transition"
-                >
-                  Skills
-                </a>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-cyan-400 transition">
-                  Contact
-                </Link>
-              </li>
-            </ul>
+          <div className="max-w-6xl mx-auto mt-12 pt-8 border-t border-white/10 text-center text-white/60">
+            © {new Date().getFullYear()} Kirusanth Palakanthan. All rights
+            reserved.
           </div>
-
-          {/* RIGHT */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Get In Touch</h4>
-            <p className="text-white/70 mb-2">
-              Feel free to reach out for collaboration or opportunities.
-            </p>
-            <a
-              href={`mailto:${person.email}`}
-              className="text-cyan-400 hover:underline"
-            >
-              {person.email}
-            </a>
-          </div>
-        </div>
-
-        <div className="mt-12 text-center text-white/50 text-sm">
-          © {new Date().getFullYear()} Kirusanth Palakanthan. All rights reserved.
-        </div>
-      </footer>
+        </footer>
+      </section>
     </div>
   );
 }
