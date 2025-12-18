@@ -12,7 +12,6 @@ type Project = {
 };
 
 const projects: Project[] = [
-  
   {
     title: "Ride & Pickup Database Management System",
 desc: "Designed and implemented a comprehensive database system to manage a campus ride & pickup marketplace. Developed a robust relational schema and optimized complex Oracle SQL queries to support users, rides, bookings, and reporting. Automated database operations using Unix shell scripts in a Linux environment to ensure data integrity, secure transactions, and reliable system performance.",
@@ -58,48 +57,24 @@ link: "#"
 export default function Projects() {
   return (
     <div className="min-h-screen bg-[var(--background)]">
-     <nav className="sticky top-0 z-50 backdrop-blur-md bg-gradient-to-b from-[var(--card-bg)]/90 to-[var(--card-bg)]/50 border-b border-[var(--card-border)]/50 shadow-lg">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex items-center justify-between h-16">
-      <Link
-        href="/"
-        className="text-xl font-bold text-[var(--accent)] hover:opacity-80 transition-opacity"
-      >
-        Kirusanth
-      </Link>
-
-      <div className="flex items-center gap-2">
-        <Link
-          href="/#about"
-          className="px-3 py-2 rounded-lg text-sm font-medium hover:bg-[var(--card-bg)]/50 text-[var(--text-secondary)] transition-all"
-        >
-          About
-        </Link>
-        <Link
-          href="/#skills"
-          className="px-3 py-2 rounded-lg text-sm font-medium hover:bg-[var(--card-bg)]/50 text-[var(--text-secondary)] transition-all"
-        >
-          Skills
-        </Link>
-        <Link
-          href="/projects"
-          className="px-3 py-2 rounded-lg text-sm font-medium bg-[var(--accent)]/20 text-[var(--accent)] transition-all"
-        >
-          Projects
-        </Link>
-        <Link
-          href="/contact"
-          className="px-3 py-2 rounded-lg text-sm font-medium hover:bg-[var(--card-bg)]/50 text-[var(--text-secondary)] transition-all"
-        >
-          Contact
-        </Link>
-
-        <ThemeToggle />
-      </div>
-    </div>
-  </div>
-</nav>
-
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 backdrop-blur-md bg-gradient-to-b from-[var(--card-bg)]/90 to-[var(--card-bg)]/50 border-b border-[var(--card-border)]/50 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link 
+              href="/"
+              className="flex items-center gap-2 text-[var(--accent)] hover:opacity-80 transition-opacity font-semibold"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              Back
+            </Link>
+            
+            <h1 className="text-xl font-bold text-[var(--accent)]">Projects</h1>
+            
+            <ThemeToggle />
+          </div>
+        </div>
+      </nav>
 
       {/* Projects Section */}
       <section className="relative py-20">
@@ -146,17 +121,15 @@ export default function Projects() {
                   ))}
                 </div>
 
-                {p.link && p.link !== "#" && (
-  <a
-    href={p.link}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="mt-4 inline-flex items-center gap-2 text-sm text-[var(--accent)] hover:gap-3 transition-all duration-300"
-  >
-    View Project
-    <ExternalLink className="w-4 h-4" />
-  </a>
-)}
+                {p.link && (
+                  <a
+                    href={p.link}
+                    className="mt-4 inline-flex items-center gap-2 text-sm text-[var(--accent)] hover:gap-3 transition-all duration-300"
+                  >
+                    View Project
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                )}
               </article>
             ))}
           </div>
@@ -165,3 +138,33 @@ export default function Projects() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
