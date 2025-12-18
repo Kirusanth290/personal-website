@@ -41,7 +41,7 @@ export default function HomePage() {
               onClick={() => scrollToId("home")} 
               className="text-xl font-bold text-[var(--accent)] hover:opacity-80 transition-opacity"
             >
-              ashwin
+              Kirusanth
             </button>
             
             <div className="flex items-center gap-2">
@@ -156,7 +156,7 @@ export default function HomePage() {
                 {/* Main image */}
                 <div className="relative w-full h-full rounded-2xl overflow-hidden border-2 border-[var(--card-border)] hover:border-[var(--accent)] transition-all duration-300 hover:shadow-2xl">
                   <Image 
-                    src="/profile2.jpg" 
+                    src="/profile.jpeg" 
                     alt={person.name}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-300"
@@ -171,34 +171,39 @@ export default function HomePage() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="relative py-20 border-t border-[var(--card-border)]/50">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--card-bg)]/10 to-transparent pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-4xl">
-            <h2 className="text-4xl font-bold text-[var(--foreground)] mb-12 flex items-center gap-3 animate-fade-in-up">
-              <div className="p-2 rounded-lg bg-[var(--accent)]/20 backdrop-blur-sm">
-                <Code2 className="w-8 h-8 text-[var(--accent)]" />
-              </div>
-              About Me
-            </h2>
-            <div className="space-y-6 text-[var(--text-secondary)]">
-              <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-                I'm Ashwin Jakanathan, a Computer Engineering student at Toronto Metropolitan University with a passion for software development, cloud computing, and data-driven systems. I enjoy designing efficient, user-focused solutions that bridge technology and creativity.
-              </p>
-              <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-                With experience in web development, database systems, and cloud infrastructure, I've built projects ranging from full-stack web apps to intelligent analytics platforms. My hands-on work includes developing responsive websites using Next.js and React, crafting SQL-based database systems, and integrating AWS services for scalable deployments.
-              </p>
-              <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-                I thrive in collaborative, agile environments where I can combine my technical knowledge with problem-solving and analytical thinking to create impactful solutions. Whether working on frontend interfaces or backend infrastructure, I'm committed to writing clean, maintainable code and delivering features that make a real impact.
-              </p>
-              <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-                When I'm not coding, I'm exploring emerging technologies, contributing to open-source projects, or learning new frameworks. Beyond work, I'm passionate about gaming, volleyball, snowboarding, and cooking. I believe that balance between technical pursuits and creative hobbies fuels innovation and keeps me grounded. Currently open to Summer 2025 internship opportunities where I can apply my skills to challenging, real-world problems.
-              </p>
-            </div>
-          </div>
+<section id="about" className="relative py-20 border-t border-[var(--card-border)]/50">
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--card-bg)]/10 to-transparent pointer-events-none" />
+
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div className="max-w-4xl">
+      <h2 className="text-4xl font-bold text-[var(--foreground)] mb-12 flex items-center gap-3 animate-fade-in-up">
+        <div className="p-2 rounded-lg bg-[var(--accent)]/20 backdrop-blur-sm">
+          <Code2 className="w-8 h-8 text-[var(--accent)]" />
         </div>
-      </section>
+        About Me
+      </h2>
+
+      <div className="space-y-6 text-[var(--text-secondary)]">
+        <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+          I’m Kirusanth Palakanthan, a Computer Engineering student at Toronto Metropolitan University, with a strong interest in software engineering, embedded systems, and full-stack development. I’m passionate about building reliable, scalable solutions that bridge hardware and software, and I enjoy applying engineering fundamentals to solve real-world problems.
+        </p>
+
+        <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+          Through my academic and project experience, I’ve developed a solid foundation in programming, data structures, and system design, with hands-on work across C/C++, Python, Java, SQL, and TypeScript. I’ve built and debugged embedded systems using microcontrollers, designed relational database systems with Oracle SQL, and developed responsive web applications using React and Next.js.
+        </p>
+
+        <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+          My projects range from a robot maze navigation system using sensor-based finite state machines, to a fully automated Ride & Pickup Database Management System integrating Oracle SQL with Unix shell scripting. I’ve also worked on backend APIs, database integration, and frontend interfaces, giving me a well-rounded perspective on modern software development.
+        </p>
+
+        <p className="text-lg leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+          I thrive in collaborative, fast-paced environments where I can combine analytical thinking with attention to detail to deliver clean, maintainable code. Outside of academics, I’m actively preparing for internship and co-op opportunities, expanding my portfolio, and strengthening my skills with tools such as Git, Docker, and cloud platforms.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Skills Section */}
       <section id="skills" className="relative py-20 border-t border-[var(--card-border)]/50">
@@ -256,7 +261,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             {/* Left Column - Branding & About */}
             <div>
-              <h3 className="text-xl font-bold text-[var(--accent)] mb-4">ashwin</h3>
+              <h3 className="text-xl font-bold text-[var(--accent)] mb-4">Kirusanth</h3>
               <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">
                 Computer Engineering student building innovative software solutions with modern web technologies.
               </p>
@@ -339,7 +344,7 @@ export default function HomePage() {
           {/* Divider */}
           <div className="border-t border-[var(--card-border)]/30 pt-8">
             <p className="text-sm text-[var(--text-secondary)] text-center">
-              © {new Date().getFullYear()} Ashwin Jakanathan. All rights reserved.
+              © {new Date().getFullYear()} Kirusanth Palakanthan. All rights reserved.
             </p>
           </div>
         </div>
