@@ -240,10 +240,10 @@ export default function HomePage() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h3 className="text-3xl font-bold text-[var(--foreground)] mb-4">
-            Ready to work together?
+            Ready to collaborate?
           </h3>
           <p className="text-[var(--text-secondary)] mb-8 max-w-2xl mx-auto">
-            I'm always interested in hearing about new projects and opportunities. Feel free to reach out!
+            I’m always open to discussing new projects, opportunities, and ideas. Feel free to get in touch.
           </p>
           <Link 
             href="/contact"
@@ -263,7 +263,7 @@ export default function HomePage() {
             <div>
               <h3 className="text-xl font-bold text-[var(--accent)] mb-4">Kirusanth</h3>
               <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">
-                Computer Engineering student building innovative software solutions with modern web technologies.
+                Computer Engineering student focused on building reliable, scalable software systems using modern technologies.
               </p>
               <div className="flex gap-4">
                 <a
@@ -330,7 +330,7 @@ export default function HomePage() {
             <div>
               <h4 className="font-semibold text-[var(--foreground)] mb-6">Get In Touch</h4>
               <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">
-                Feel free to reach out for collaborations or just a friendly hello!
+                Feel free to reach out for collaborations, opportunities, or just a friendly conversation.
               </p>
               <a
                 href={`mailto:${person.email}`}
